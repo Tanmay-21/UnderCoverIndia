@@ -32,31 +32,6 @@ export default function WordCard({ player }: WordCardProps) {
     }
   };
 
-  if (player.role === "mrWhite") {
-    return (
-      <div className="max-w-md mx-auto h-64">
-        <Card 
-          className={cn(
-            "w-full h-full bg-gradient-to-br border-2 flex items-center justify-center cursor-pointer",
-            getRoleColor()
-          )}
-          onClick={toggleFlip}
-          data-testid="card-word-mr-white"
-        >
-          <div className="text-center p-8">
-            <VenetianMask className="w-16 h-16 text-chart-5 mx-auto mb-4" />
-            <h2 className="text-4xl font-serif font-bold text-foreground mb-3">
-              You are Mr. White
-            </h2>
-            <p className="text-muted-foreground text-sm max-w-xs mx-auto">
-              You don't have a word. Listen carefully to others and try to blend in!
-            </p>
-          </div>
-        </Card>
-      </div>
-    );
-  }
-
   return (
     <div 
       className={cn("flip-card max-w-md mx-auto h-64", isFlipped && "flipped")}
@@ -78,25 +53,26 @@ export default function WordCard({ player }: WordCardProps) {
           getRoleColor()
         )}>
           <div className="text-center p-8">
-            <p className="text-sm text-muted-foreground uppercase tracking-wide mb-3">
-              Your Word
-            </p>
-            <h2 className="text-5xl font-serif font-bold text-foreground mb-4">
-              {player.word?.toUpperCase() || "NO WORD"}
-            </h2>
-            <div className="inline-block bg-card px-4 py-2 rounded-full border border-border">
-              <span className="text-xs text-muted-foreground">Role: </span>
-              <span className={cn(
-                "text-sm font-semibold",
-                player.role === "civilian" && "text-chart-2",
-                player.role === "undercover" && "text-chart-3",
-                player.role === "mrWhite" && "text-chart-5"
-              )}>
-                {player.role === "civilian" && "Civilian"}
-                {player.role === "undercover" && "Undercover"}
-                {player.role === "mrWhite" && "Mr. White"}
-              </span>
-            </div>
+            {player.role === "mrWhite" ? (
+              <>
+                <VenetianMask className="w-16 h-16 text-chart-5 mx-auto mb-4" />
+                <h2 className="text-4xl font-serif font-bold text-foreground mb-3">
+                  You are Mr. White
+                </h2>
+                <p className="text-muted-foreground text-sm max-w-xs mx-auto">
+                  You don't have a word. Listen carefully to others and try to blend in!
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-muted-foreground uppercase tracking-wide mb-3">
+                  Your Word
+                </p>
+                <h2 className="text-5xl font-serif font-bold text-foreground">
+                  {player.word?.toUpperCase() || "NO WORD"}
+                </h2>
+              </>
+            )}
           </div>
         </Card>
       </div>

@@ -334,8 +334,10 @@ export default function Game({ params }: GameProps) {
           </section>
         )}
 
-        {/* Leaderboard */}
-        <Leaderboard players={gameState.players} currentRound={gameState.room.currentRound} />
+        {/* Leaderboard - Only show when game is over */}
+        {gameState.room.phase === "gameOver" && (
+          <Leaderboard players={gameState.players} currentRound={gameState.room.currentRound} />
+        )}
       </main>
 
       {/* Modals */}
