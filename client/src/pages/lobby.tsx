@@ -22,8 +22,8 @@ export default function Lobby({ params }: LobbyProps) {
   const [undercoverCount, setUndercoverCount] = useState(2);
   const [mrWhiteCount, setMrWhiteCount] = useState(1);
 
-  const isHost = gameState?.players.find(p => p.id === playerId)?.isHost;
-  const totalPlayers = gameState?.players.length || 0;
+  const isHost = gameState?.players?.find(p => p.id === playerId)?.isHost;
+  const totalPlayers = gameState?.players?.length || 0;
   const civilianCount = Math.max(0, totalPlayers - undercoverCount - mrWhiteCount);
 
   useEffect(() => {
